@@ -20,13 +20,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Move between tabs
-vim.keymap.set("n", '<S-H>', '<Cmd>BufferPrevious<CR>')
-vim.keymap.set("n", '<S-L>', '<Cmd>BufferNext<CR>')
-
 -- Yank to system register
 vim.keymap.set("n", "Y", "yy")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
-
