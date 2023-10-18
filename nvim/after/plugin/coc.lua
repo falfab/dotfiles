@@ -107,7 +107,7 @@ keyset("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", opts)
 -- Remap keys for apply source code actions for current file.
 keyset("n", "<leader>as", "<Plug>(coc-codeaction-source)", opts)
 -- Apply the most preferred quickfix action on the current line.
-keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
+keyset("n", "<leader>fq", "<Plug>(coc-fix-current)", opts)
 
 -- Remap keys for apply refactor code actions.
 keyset("n", "<leader>re", "<Plug>(coc-codeaction-refactor)", { silent = true })
@@ -157,4 +157,4 @@ vim.api.nvim_create_user_command("OR", "call CocActionAsync('runCommand', 'edito
 -- provide custom statusline: lightline.vim, vim-airline
 vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
 
-keyset("n", "<leader>f", vim.cmd.Format)
+-- keyset("n", "<leader>f", vim.cmd.Format)
