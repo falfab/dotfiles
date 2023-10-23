@@ -8,3 +8,4 @@ vim.wo.relativenumber = true
 vim.opt.termguicolors = true
 
 vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
