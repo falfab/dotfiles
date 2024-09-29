@@ -1,0 +1,12 @@
+{
+    "diagnostic.checkCurrentLine": true,
+    "clangd.path": "/usr/bin/clangd-14",
+    "coc.preferences.formatOnSaveFiletypes": ["cpp", "cmake", "python", "lua"],
+    "python.analysis.typeCheckingMode": "off",
+    "python.formatting.provider":"black",
+    "python.formatting.blackArgs": ["--line-length=120"],
+    "inlayHint.enable": false,
+    "diagnostic-languageserver.filetypes": {
+      "dockerfile": "hadolint",
+    }
+}
