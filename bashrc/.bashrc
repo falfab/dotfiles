@@ -11,6 +11,9 @@ export OSH='${HOME}/.oh-my-bash'
 # it'll load a random theme each time that oh-my-bash is loaded.
 OSH_THEME="agnoster"
 
+# If you set OSH_THEME to "random", you can ignore themes you don't like.
+# OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
+
 # Uncomment the following line to use case-sensitive completion.
 # OMB_CASE_SENSITIVE="true"
 
@@ -144,6 +147,27 @@ source "$OSH"/oh-my-bash.sh
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf-history"
 
 calc() {
-    expression=$@
-    python -c "from numpy import *; print($expression)"
+	expression=$@
+	python -c "from numpy import *; print($expression)"
 }
+
+# Extend path
+export PATH="${PATH}:/${HOME}/.local/bin"
+
+# Vim as Neovim
+alias vim="nvim"
+
+# Node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# Source ROS
+source /opt/ros/humble/setup.bash
+export RCUTILS_COLORIZED_OUTPUT=1
+export ROS_DOMAIN_ID=121
+
+# Disable colcon notifications
+export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
+
