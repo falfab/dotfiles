@@ -1,3 +1,6 @@
 [submodule "tmux/.tmux/plugins/tpm"]
 	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "fonts/caskaydia-cove"]
+	path = fonts/caskaydia-cove
+	url = https://github.com/eliheuer/caskaydia-cove.git

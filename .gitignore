@@ -3,3 +3,7 @@ tmux/.tmux/plugins/tmux-nerd-font-window-name/
 tmux/.tmux/plugins/tmux-nova/
 tmux/.tmux/plugins/tmux-sensible/
 tmux/.tmux/plugins/vim-tmux-navigator/
+
+packer_compiled.lua
+
+.DS_Store
