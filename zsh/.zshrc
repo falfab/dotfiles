@@ -63,7 +63,8 @@ eval "$(fzf --zsh)"
 # eval "$(zoxide init --cmd cd zsh)"
 
 # Aliases
-alias ls='ls --color'
-alias ll='ls -lisa'
 alias vim='nvim'
 alias c='clear'
+alias ls='exa --icons --color=always -a --group-directories-first'
+alias ll='exa --icons --color=always -a --group-directories-first --long'
+alias cat='bat --theme base16 -p'
