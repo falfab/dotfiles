@@ -51,20 +51,32 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init zsh)"
+
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-
-# Shell integrations
-eval "$(fzf --zsh)"
-# eval "$(zoxide init --cmd cd zsh)"
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Aliases
 alias vim='nvim'
 alias c='clear'
+alias cd='z'
 alias ls='exa --icons --color=always -a --group-directories-first'
 alias ll='exa --icons --color=always -a --group-directories-first --long'
 alias cat='bat --theme base16 -p'
+
+# Fzf options to match everforest theme
+export FZF_DEFAULT_OPTS='--color=fg:-1,fg+:#ffefcc,bg:-1,bg+:#232a2e,hl:#a7c980,hl+:#a7c980,info:#d3c6aa,marker:#83c092,prompt:#d699b6,spinner:#dbbc7f,pointer:#d699b6,header:#7fbbb3,border:#3d484d,label:#aeaeae,query:#d3c6aa --border-label-pos="0" --preview-window="border-rounded" --prompt="❯ " --marker="❯" --pointer="│" --separator="─" --scrollbar="│"'
+zstyle ':fzf-tab:*' fzf-flags --color='fg:-1,fg+:#ffefcc,bg:-1,bg+:#232a2e,hl:#a7c980,hl+:#a7c980,info:#d3c6aa,marker:#83c092,prompt:#d699b6,spinner:#dbbc7f,pointer:#d699b6,header:#7fbbb3,border:#3d484d,label:#aeaeae,query:#d3c6aa' --border-label-pos="0" --preview-window="border-rounded" --prompt="❯ " --marker="❯" --pointer="│" --separator="─" --scrollbar="│" --bind=tab:accept
+
+# Useful functions
+function calc() {
+	expression=$@
+	python3 -c "from numpy import *; print($expression)"
+}
