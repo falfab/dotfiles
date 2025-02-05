@@ -29,5 +29,3 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 -- Remap Esc to Tab and viceversa
 vim.keymap.set("n", "<Tab>", "<Esc>")
 vim.keymap.set("n", "<Tab>", "<Esc>")
-
-
