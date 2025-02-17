@@ -52,7 +52,8 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Shell integrations
-eval "$(fzf --zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+unalias zi 2>/dev/null
 eval "$(zoxide init zsh)"
 
 # Completion styling
@@ -80,3 +81,23 @@ function calc() {
 	expression=$@
 	python3 -c "from numpy import *; print($expression)"
 }
+# Allow arrow navigation
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+bindkey "${key[Up]}" up-line-or-local-history
+bindkey "${key[Down]}" down-line-or-local-history
+
+up-line-or-local-history() {
+    zle set-local-history 1
+    zle up-line-or-history
+    zle set-local-history 0
+}
+zle -N up-line-or-local-history
+down-line-or-local-history() {
+    zle set-local-history 1
+    zle down-line-or-history
+    zle set-local-history 0
+}
+zle -N down-line-or-local-history
+
