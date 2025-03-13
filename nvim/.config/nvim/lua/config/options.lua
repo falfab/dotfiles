@@ -9,3 +9,13 @@ vim.opt.termguicolors = true
 
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
+vim.opt.undofile = true
+
+vim.opt.incsearch = true
+vim.opt.hlsearch = false
+
+vim.opt.scrolloff = 8
