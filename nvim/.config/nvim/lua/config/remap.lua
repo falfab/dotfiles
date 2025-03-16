@@ -22,9 +22,9 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- Yank to system register
 vim.keymap.set("n", "Y", "yy")
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
 
 -- Remap Esc to Tab and viceversa
 vim.keymap.set("n", "<Tab>", "<Esc>")

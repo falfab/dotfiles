@@ -156,7 +156,7 @@ return {
 				})
 
 				require("mason-lspconfig").setup({
-					ensure_installed = { "lua_ls", "pyright", "rust-analyzer", "clangd" },
+					ensure_installed = { "lua_ls", "pyright", "rust_analyzer", "clangd" },
 					handlers = {
 						-- this first function is the "default handler"
 						-- it applies to every language server without a "custom handler"
