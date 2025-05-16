@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>w", vim.cmd.w)
+-- vim.keymap.set("n", "<leader>w", vim.cmd.w)
 -- vim.keymap.set("n", "<leader>q", vim.cmd.q)
 -- vim.keymap.set("n", "<leader>x", vim.cmd.x)
 vim.keymap.set("n", "<leader>v", vim.cmd.vsplit)
@@ -28,4 +28,4 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 
 -- Remap Esc to Tab and viceversa
 vim.keymap.set("n", "<Tab>", "<Esc>")
-vim.keymap.set("n", "<Tab>", "<Esc>")
+vim.keymap.set("n", "<Esc>", "<Tab>")
