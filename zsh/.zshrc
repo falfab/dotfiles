@@ -101,3 +101,5 @@ down-line-or-local-history() {
 }
 zle -N down-line-or-local-history
 
+# Source local envs
+[ -f ~/.zshrc_local ] && source ~/.zshrc_local
