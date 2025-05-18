@@ -41,7 +41,7 @@ return {
 				-- C-k: Toggle signature help (if signature.enabled = true)
 				--
 				-- See :h blink-cmp-config-keymap for defining your own keymap
-				keymap = { preset = "super-tab" },
+				keymap = { preset = "super-tab", ["<Enter>"] = { "accept", "fallback" } },
 
 				appearance = {
 					-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -166,8 +166,6 @@ return {
 				vim.opt.signcolumn = "yes"
 			end,
 			config = function()
-				local lsp_defaults = require("lspconfig").util.default_config
-
 				-- LspAttach is where you enable features that only work
 				-- if there is a language server active in the file
 				vim.api.nvim_create_autocmd("LspAttach", {
