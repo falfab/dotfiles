@@ -15,29 +15,45 @@
       "shift-left": "pane::ActivatePreviousItem",
       "shift-right": "pane::ActivateNextItem",
       "space e": "project_panel::ToggleFocus",
-      "space c": "workspace::ToggleLeftDock",
+      "space c": "agent::ToggleFocus",
       "space f f": "file_finder::Toggle",
       "space g f": "workspace::NewSearch",
-      "space g r": "editor::FindAllReferences"
-    }
+      "space g r": "editor::FindAllReferences",
+    },
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space e": "project_panel::ToggleFocus",
+      "space c": "agent::ToggleFocus",
+      "space f f": "file_finder::Toggle",
+      "space g f": "workspace::NewSearch",
+    },
+  },
+  {
+    "context": "(Editor || ProjectPanel && !AgentPanel) && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      "space c": "workspace::ToggleLeftDock",
+    },
   },
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
+      "space c": "agent::ToggleFocus",
       "space e": "workspace::ToggleRightDock",
       "ctrl-v": "project_panel::OpenSplitVertical",
-      "ctrl-h": "project_panel::OpenSplitHorizontal"
-    }
+      "ctrl-h": "project_panel::OpenSplitHorizontal",
+    },
   },
   {
     "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
     "bindings": {
       "J": "editor::MoveLineDown",
-      "K": "editor::MoveLineUp"
-    }
+      "K": "editor::MoveLineUp",
+    },
   },
   {
     "context": "Editor && vim_mode == insert",
-    "bindings": {}
-  }
+    "bindings": {},
+  },
 ]

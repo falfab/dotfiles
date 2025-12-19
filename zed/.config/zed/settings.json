@@ -102,7 +102,7 @@
   "ui_font_family": "CaskaydiaCove Nerd Font",
   "buffer_line_height": "comfortable",
   "agent": {
-    "default_profile": "write",
+    "default_profile": "ask",
     "profiles": {
       "test": {
         "default_model": {
