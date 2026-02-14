@@ -1,6 +1,4 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -16,27 +14,65 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Install NVM (Node 17 needed by COC)
-[ ! -d ${HOME}/.nvm ] && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# ===== LAZY LOAD NVM (CRITICAL OPTIMIZATION) =====
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Function to lazy load NVM
+_load_nvm() {
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+# Lazy load nvm, node, npm, npx
+nvm() {
+  unset -f nvm node npm npx
+  _load_nvm
+  nvm "$@"
+}
+
+node() {
+  unset -f nvm node npm npx
+  _load_nvm
+  node "$@"
+}
+
+npm() {
+  unset -f nvm node npm npx
+  _load_nvm
+  npm "$@"
+}
+
+npx() {
+  unset -f nvm node npm npx
+  _load_nvm
+  npx "$@"
+}
 
 # Install Powerlevel10k theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Other zsh plugins
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+# ===== OPTIMIZED COMPLETIONS (CACHE FOR 20 HOURS) =====
+autoload -Uz compinit
+setopt EXTENDEDGLOB
+if [[ -n ${ZDOTDIR}/.zcompdump(#qNmh-20) ]]; then
+  compinit -C
+else
+  compinit
+  compdump
+fi
+unsetopt EXTENDEDGLOB
 
-# Load completions
-autoload -Uz compinit && compinit
-
-zinit cdreplay -q
+# ===== DEFERRED PLUGIN LOADING (TURBO MODE) =====
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+    zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-syntax-highlighting \
+    Aloxaf/fzf-tab
 
 # History
 HISTSIZE=5000
@@ -51,10 +87,25 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Shell integrations
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-unalias zi 2>/dev/null
-eval "$(zoxide init zsh)"
+# ===== LAZY LOAD FZF =====
+if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+fi
+
+# Defer FZF loading
+if [[ $- == *i* ]] && [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+fi
+
+# ===== LAZY LOAD ZOXIDE =====
+_zoxide_loaded=0
+z() {
+  if [[ $_zoxide_loaded -eq 0 ]]; then
+    eval "$(zoxide init zsh)"
+    _zoxide_loaded=1
+  fi
+  __zoxide_z "$@"
+}
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -80,10 +131,10 @@ function calc() {
 	expression=$@
 	python3 -c "from numpy import *; print($expression)"
 }
+
 # Allow arrow navigation
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-
 bindkey "${key[Up]}" up-line-or-local-history
 bindkey "${key[Down]}" down-line-or-local-history
 
@@ -93,6 +144,7 @@ up-line-or-local-history() {
     zle set-local-history 0
 }
 zle -N up-line-or-local-history
+
 down-line-or-local-history() {
     zle set-local-history 1
     zle down-line-or-history
@@ -102,7 +154,5 @@ zle -N down-line-or-local-history
 
 # Source local envs
 [ -f ~/.zshrc_local ] && source ~/.zshrc_local
-
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
 export PATH=$HOME/.local/bin:$PATH
