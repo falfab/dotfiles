@@ -24,3 +24,11 @@ Install the dotfiles:
 stow nvim
 ```
 
+## Fonts
+
+After installing fonts it's a good idea to manually rebuild the font cache
+
+```bash
+fc-cache -f -r -v
+```
+

@@ -62,7 +62,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Aliases
 alias vim='nvim'
@@ -103,3 +102,7 @@ zle -N down-line-or-local-history
 
 # Source local envs
 [ -f ~/.zshrc_local ] && source ~/.zshrc_local
+
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+export PATH=$HOME/.local/bin:$PATH
